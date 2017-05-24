@@ -1,3 +1,4 @@
+.DS_Store
 # Project custom
 code/**/*2.py
 .envrc
