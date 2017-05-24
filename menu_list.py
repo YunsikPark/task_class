@@ -6,7 +6,7 @@ def menu_list():
     print('주문 메뉴를 선택해 주세요')
 
     bread_type = list(bread_dict.keys())
-    input('빵을 선택해 주세요\n1. {}\n2. {}\n3. {}\n'.format(
+    print('빵을 선택해 주세요\n1. {}\n2. {}\n3. {}\n'.format(
         bread_type[0],
         bread_type[1],
         bread_type[2]
@@ -14,7 +14,7 @@ def menu_list():
     choiced_bread = bread_type[int(input()) - 1]
 
     meat_type = list(meat_dict.keys())
-    input('패티를 선택해주세요\n1. {}\n2. {}\n3. {}\n'.format(
+    print('패티를 선택해주세요\n1. {}\n2. {}\n3. {}\n'.format(
         meat_type[0],
         meat_type[1],
         meat_type[2]
@@ -22,7 +22,7 @@ def menu_list():
     choiced_meat = meat_type[int(input()) - 1]
 
     sauce_type = list(sauce_dict.keys())
-    input('소스를 선택해주세요\n1. {}\n2. {}\n3. {}\n'.format(
+    print('소스를 선택해주세요\n1. {}\n2. {}\n3. {}\n'.format(
         sauce_type[0],
         sauce_type[1],
         sauce_type[2]
@@ -30,8 +30,7 @@ def menu_list():
     choiced_sauce = sauce_type[int(input()) - 1]
 
     total_price = bread_dict[choiced_bread] + meat_dict[choiced_meat] + sauce_dict[choiced_sauce]
-    SubwaySandwichOrder(choiced_bread, choiced_meat, choiced_sauce, total_price, False)
-
+    SubwaySandwichOrder(None, choiced_bread, choiced_meat, choiced_sauce, total_price, False)
 
 
 bread_dict = {
