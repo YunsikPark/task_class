@@ -6,4 +6,4 @@ from naver import *
 
 webtoon_id = 183559
 comics = NaverWebtoonCrawler(webtoon_id)
-comics.crawl_episode(4)
+comics.crawl_episode(1)

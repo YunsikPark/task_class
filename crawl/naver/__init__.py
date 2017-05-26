@@ -8,7 +8,7 @@ class NaverWebtoonCrawler:
     _url_detail_base = 'http://comic.naver.com/webtoon/detail.nhn?' \
                        'titleId={webtoon_id}&' \
                        'no={episode_num}&' \
-                       'weekday=wed'
+                       # 'weekday=wed'
 
     def __init__(self, webtoon_id):
         self.webtoon_id = webtoon_id
@@ -22,7 +22,8 @@ class NaverWebtoonCrawler:
         :param episode_num: 
         :return: 
         """
-        dir_path = '{}/{}'.format(self.webtoon_id, episode_num)
+        dir_path = '{}/{:02}'.format(self.webtoon_id, episode_num)
+
         def make_episode_dir():
             # 이미지를 저장하기 위한 폴더 생성
             print(dir_path)
@@ -42,7 +43,7 @@ class NaverWebtoonCrawler:
             #     print('dir exist, error:', e)
 
 
-            #3번
+            # 3번
             # exist_ok매개변수 추가
             os.makedirs(dir_path, exist_ok=True)
 
@@ -95,19 +96,30 @@ class NaverWebtoonCrawler:
                 dir_path,
                 index
             )
+
             with open(img_path, 'wb') as f:
                 f.write(response.content)
 
         # 해당 에피소드를 볼 수 있는 HTML파일을 생성
-        """
-        <html>
-            <img src="651673/1/00.jpg">
-            <img src="651673/1/01.jpg">
-            <img src="651673/1/02.jpg">
-            <img src="651673/1/03.jpg">
-        </html>
-        """
-        print('Crawling complete')
+        # html_path = '{}/{:02}.html'.format(
+        #     self.webtoon_id,
+        #     episode_num,
+        # )
+        # 위 경로로 파일을 쓰기 모드로 열고 '<html>'을 기록 후 닫기
+        with open('{}/{:02}/{:02}.html'.format(self.webtoon_id, episode_num, episode_num), 'wt') as f:
+            f.write('<html>\n')
+            for i in range(len(img_list)):
+                f.write('<img src = \t"{:02}.jpg"><br>\n'.format(i))
+            f.write('</html>')
+            """
+            <html>
+                <img src="651673/1/00.jpg">
+                <img src="651673/1/01.jpg">
+                <img src="651673/1/02.jpg">
+                <img src="651673/1/03.jpg">
+            </html>
+            """
+            print('Crawling complete')
 
     def crawl_all_episodes(self):
         return ''
